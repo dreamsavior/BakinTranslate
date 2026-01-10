@@ -13,12 +13,32 @@ namespace BakinTranslate.CLI.Handler
             var playerPath = options.PlayerPath;
             var backupPlayerPath = Path.Combine(gameDirectory, "data", "bakinplayer.exe.bak");
             var originalPlayerPath = Path.Combine(gameDirectory, "data", "bakinplayer.exe");
-            if (!File.Exists(backupPlayerPath) && File.Exists(originalPlayerPath))
-            {
-                File.Copy(originalPlayerPath, backupPlayerPath);
-                Console.WriteLine($"Backup created at {backupPlayerPath}");
-            }
             var zipPath = Path.Combine(gameDirectory, "data", "bakinplayer.pak");
+            if (!File.Exists(backupPlayerPath))
+            {
+                if (File.Exists(originalPlayerPath))
+                {
+                    File.Copy(originalPlayerPath, backupPlayerPath);
+                    Console.WriteLine($"Backup created at {backupPlayerPath}");
+                }
+                else if (File.Exists(zipPath))
+                {
+                    using (var fileStream = File.OpenRead(zipPath))
+                    {
+                        var zip = new ZipArchive(fileStream, ZipArchiveMode.Read);
+                        using (var entryStream = zip.GetEntry("bakinplayer.exe").Open())
+                        using (var backupStream = File.OpenWrite(backupPlayerPath))
+                            entryStream.CopyTo(backupStream);
+                    }
+                    Console.WriteLine($"Backup created at {backupPlayerPath}");
+                }
+                else
+                {
+                    Console.WriteLine("Original player not found. Cannot create backup.");
+                    return;
+                }
+            }
+
             if (File.Exists(zipPath))
             {
                 using (var fileStream = File.OpenWrite(zipPath))
@@ -37,7 +57,7 @@ namespace BakinTranslate.CLI.Handler
             }
             else
             {
-                File.Copy(playerPath, originalPlayerPath);
+                File.Copy(playerPath, originalPlayerPath, overwrite: true);
                 Console.WriteLine($"Player injected into {originalPlayerPath} successfully.");
             }
         }

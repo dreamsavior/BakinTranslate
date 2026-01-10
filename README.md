@@ -32,7 +32,7 @@
    Run the following command using `BakinTranslate.CLI.exe`:
 
    ```
-   BakinTranslate.CLI.exe override-player <game_directory> <new_player_path>
+   BakinTranslate.CLI.exe override-player <game_directory>
    ```
 
 6. **Launch the game**  

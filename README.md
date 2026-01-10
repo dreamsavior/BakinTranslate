@@ -29,7 +29,11 @@
    Place the `dic.txt` file in the game's `data` directory. **The filename must be `dic.txt`.**
 
 5. **Enable dictionary support by replacing the player executable**  
-   Rename the original `bakinplayer.exe` to `bakinplayer.exe.bak`, and replace it with the version provided by this project. This enables dictionary-based translation functionality.
+   Run the following command using `BakinTranslate.CLI.exe`:
+
+   ```
+   BakinTranslate.CLI.exe override-player <game_directory> <new_player_path>
+   ```
 
 6. **Launch the game**  
    Start the game using the game launcher. Translations should now take effect.

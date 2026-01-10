@@ -10,11 +10,13 @@ namespace BakinTranslate.CLI
         static void Main(string[] args)
         {
             var options = Parser.Default.ParseArguments(args, new Type[] { 
-                typeof(DumpOptions)
+                typeof(DumpOptions),
+                typeof(OverridePlayerOptions)
             }).Value;
             if (options is DumpOptions dumpOptions)
                 new DumpHandler().Handle(dumpOptions);
-
+            else if (options is OverridePlayerOptions injectOptions)
+                new OverridePlayerHandler().Handle(injectOptions);
         }
     }
 }

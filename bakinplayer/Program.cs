@@ -50,7 +50,7 @@ namespace bakinplayer
             }
             catch (Exception ex)
             {
-                File.WriteAllText("error.log", ex.ToString());
+                File.WriteAllText(errorLogName, ex.ToString());
             }
 
         }

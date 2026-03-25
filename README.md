@@ -16,6 +16,14 @@
 
    This will create a file named `dic.txt` by default.
 
+   If you want the dictionary to be split by source file, use:
+
+   ```
+   BakinTranslate.CLI.exe dump-split <game_directory> <unpack_directory> [-o output_directory]
+   ```
+
+   This creates a `dic-split` directory by default and mirrors the original unpacked directory structure so each translation file stays grouped by its source file.
+
 3. **Edit translations**  
    The dictionary file consists of key-value pairs, one per line. Each line uses `\t` as the separator:
 

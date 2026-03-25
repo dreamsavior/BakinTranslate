@@ -86,6 +86,7 @@
     <Compile Include="Handler\DumpHandler.cs" />
     <Compile Include="Handler\OverridePlayerHandler.cs" />
     <Compile Include="Options\DumpOptions.cs" />
+    <Compile Include="Options\DumpSplitOptions.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Options\OverridePlayerOptions.cs" />
     <Compile Include="Program.cs" />
